@@ -1,9 +1,11 @@
 import React from 'react'
+import Navbar from '../../Components/Navigation/Navbar/Navbar'
 
 const Page2 = () => {
     return (
         <>
-            <h1>Page 2</h1>
+            <Navbar />
+            <h4 className='text-light'>Page 2</h4>
         </>
     )
 }
