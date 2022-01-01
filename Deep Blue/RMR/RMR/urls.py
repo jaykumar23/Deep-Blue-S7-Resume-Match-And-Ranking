@@ -18,35 +18,5 @@ from django.urls import path
 from RMRapp import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/v1/ind/liquor/', views.indLiquorCreate),
-    path('api/v1/ind/view/<sid>', views.viewdata),
-    path('api/v1/ind/login/', views.user_login),
-    path('api/v1/ind/update/<sid>', views.indliquorhodupdate),
-    path('api/v1/ind/sup_view/', views.supervisor_viewdata),
-    path('api/v1/ind/sup_history/', views.supervisor_history),
-    path('api/v1/ind/hod_view/<id>', views.hod_viewdata),
-    path('api/v1/ind/hod_history/', views.hod_history),
-    path('api/v1/getdetails/<formid>', views.SingleForm),
-    path('api/v1/logout/<userid>', views.Logout),
-    path('api/v1/viewslurry/', views.SlurryList),
-    path('api/v1/slurryhistory/', views.SlurryHistory),
-    path('api/v1/specificslurry/<int:objid>', views.SingleSlurry),
-    path('api/v1/specificEmulsion/<int:objid>', views.SingleEmulsion),
-    path('api/v1/createchecksheetregular/<int:objid>', views.CreateEmulsionRegularChecksheet),
-
-    path('api/v1/createchecksheet/', views.CreateChecksheet),
-    path('api/v1/checklist/', views.CheckSheetList),
-    path('api/v1/checkhistory/', views.CheckSheetHistory),
-    path('api/v1/specificchecksheet/<int:objid>', views.SingleCheckSheet),
-    path('api/v1/thingsboard/', views.getThingsBoardData),
-    path('api/v1/savedslurry/', views.GetUnsubmittedSlurry),
-    path('api/v1/plantemployees/', views.PlantEmployees),
-
-    path('api/v1/castboosterdata/', views.getCBTable),
-    path('api/v1/castboosterdates/<str:fromDate>/<str:toDate>', views.getCBDates),
-    path('api/v1/castboostershift/<str:d1>/<str:shift>', views.GetCBShifts),
-    path('api/v1/castboostersize/<str:s>', views.getCBSize),
-
-    path('scheduledData/', views.ScheduledDataUpdate),
+    path('admin/', admin.site.urls)
 ]
