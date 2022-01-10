@@ -1,0 +1,62 @@
+.register {
+  max-width: 650px;
+  border-radius: 15px;
+  background: #fff;
+  padding: 0;
+  padding-bottom: 1.8rem;
+}
+
+.css-ve4m59-MuiFormLabel-root {
+  margin: 0;
+}
+
+.register .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked {
+  color: #17684f;
+}
+
+.register .button {
+  background-color: #17684f;
+  outline: none;
+  border: 0;
+  padding: 0.7rem 2rem;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: 0.5s ease;
+}
+
+.register .button:hover {
+  background-color: #073828;
+}
+
+.register .css-bz6wus-MuiInputBase-root-MuiOutlinedInput-root,
+.register .css-sqs87j-MuiInputBase-root-MuiOutlinedInput-root,
+.register .css-kzf2d7-MuiInputBase-root-MuiOutlinedInput-root {
+  border-radius: 30px;
+  padding: 0 0.8rem;
+  background-color: #ffffff;
+}
+
+.register .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border-width: 3px;
+}
+
+.register .register-title {
+  background-color: #17684f;
+  color: #fff;
+}
+
+.register .register-title svg {
+  color: #17684f;
+}
+
+.register .icon-div {
+  border-radius: 50%;
+  margin-left: 1rem;
+  background-color: rgb(255, 255, 255);
+  transition: 0.3s ease;
+}
+
+.register .icon-div:hover {
+  transform: translateX(-7px);
+}

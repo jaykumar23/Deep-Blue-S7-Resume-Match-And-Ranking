@@ -1,0 +1,74 @@
+.login {
+  border-radius: 15px;
+  max-width: 1000px;
+  padding: 0 1rem;
+  height: 90vh;
+  min-width: fit-content;
+  min-height: fit-content;
+}
+
+.login .login-inputs input {
+  font-weight: 500;
+  color: rgb(54, 54, 54);
+  text-decoration: none;
+  margin: 0.5rem 0;
+  background-color: rgb(229, 229, 229);
+  outline: none;
+  border: none;
+  border-radius: 25px;
+  padding: 0.7rem 2rem;
+  width: 90%;
+  max-width: 300px;
+}
+
+.login .login-inputs input:focus-within {
+  border: 2px solid rgb(0, 228, 0);
+}
+
+.login button {
+  padding: 0.7rem 0;
+  background-color: #318a6e;
+  width: 80%;
+  max-width: 300px;
+  color: white;
+  outline: none;
+  border-radius: 25px;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2px;
+  transition: 0.3s ease;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.login button:hover {
+  background-color: #084532;
+}
+
+.login #forgot {
+  margin: 2rem 0;
+  font-size: 0.9rem;
+  color: rgb(121, 121, 121);
+  font-weight: 500;
+}
+
+.login #forgot span {
+  color: #000;
+}
+
+.login #forgot span:hover {
+  color: #17684f;
+  cursor: pointer;
+}
+
+.login #register-btn {
+  position: absolute;
+  bottom: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login #register-btn:hover {
+  color: #17684f;
+}

@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 
-@import url(https://fonts.googleapis.com/css?family=DM+Sans:regular,italic,500,500italic,700,700italic);
+@import url(https://fonts.googleapis.com/css?family=DM+Sans:regular,italic,500,500italic,600,700,700italic,800);
 
 * {
   padding: 0;
@@ -10,11 +10,12 @@
 }
 
 body {
-  background: url("https://wallpapercave.com/wp/wp6086989.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: rgb(1, 127, 141);
+  background: radial-gradient(
+    circle,
+    rgba(1, 127, 141, 1) 52%,
+    rgba(0, 68, 83, 1) 100%
+  );
 }
 
 .h1,
@@ -34,6 +35,11 @@ ul,
 li {
   padding: 0;
   margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: initial;
 }
 
 .fw-400 {
