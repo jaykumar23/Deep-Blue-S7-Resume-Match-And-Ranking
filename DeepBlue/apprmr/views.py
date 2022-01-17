@@ -206,7 +206,7 @@ def user_profile(request):
 
 
 # RESUME OPERATIONS
-api_view(['PUT','POST', 'GET'])
+@api_view(['PUT','POST', 'GET'])
 def upload_resume(request,userid):
     if request.method == 'PUT' or request.method == 'POST':
         data = request.data.get('')
@@ -231,7 +231,7 @@ def upload_resume(request,userid):
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
 
 # JOB OPERATIONS
-api_view(['PUT','POST', 'GET'])
+@api_view(['PUT','POST', 'GET'])
 def upload_job(request,id):
     if request.method == 'PUT' or request.method == 'POST':
         data = request.data.get('')
@@ -259,7 +259,7 @@ def upload_job(request,id):
 
 
 # VIEW JOB AND APPLICANTS TO RECRUITER
-api_view(['GET'])
+@api_view(['GET'])
 def view_job_applicants(request,userid):
     if request.method == 'GET':
         data = {}
@@ -330,17 +330,21 @@ def apply_for_job(request):
 
 
 # JOB APPLIED APPLIED BY APPLICANTS
-api_view(['GET'])
+@api_view(['GET'])
 def applied_job(request, userid):
     if request.method == 'GET':
-        data = {}
+        data = []
         jobobj = ApplicantResumeJobRecruiter.objects.select_related('applicant').filter(applicant_id=userid)
         for i in range(len(jobobj)):
-            data[i] = {}
-            data[i]['job'] = JobSerializer(jobobj[i].job).data
-            data[i]['recruiter'] = {}
-            data[i]['recruiter'].update(SignupSerializer(jobobj[i].job.recruiter).data)
-            data[i]['recruiter'].update(RecruiterProfileSerializer(RecruiterProfile.objects.get(recruiter=jobobj[i].job.recruiter.id)).data)
+            job = JobSerializer(jobobj[i].job).data
+            job['status'] = jobobj[i].status
+            recruiter = {}
+            recruiter.update(SignupSerializer(jobobj[i].job.recruiter).data)
+            recruiter.update(RecruiterProfileSerializer(RecruiterProfile.objects.get(recruiter=jobobj[i].job.recruiter.id)).data)
+            j = {}
+            j['job'] = job
+            j['recruiter'] = recruiter
+            data.append(j)
         return JsonResponse(data, safe=False)
     else:
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
@@ -348,17 +352,20 @@ def applied_job(request, userid):
 
 
 # SHOW ALL JOBS
-api_view(['GET'])
+@api_view(['GET'])
 def show_job(request):
     if request.method == 'GET':
-        data = {}
+        data = []
         jobobj = Job.objects.all()
         for i in range(len(jobobj)):
-            data[i] = {}
-            data[i]['job'] = JobSerializer(jobobj[i]).data
-            data[i]['recruiter'] = {}
-            data[i]['recruiter'].update(SignupSerializer(jobobj[i].recruiter).data)
-            data[i]['recruiter'].update(RecruiterProfileSerializer(RecruiterProfile.objects.get(recruiter=jobobj[i].recruiter.id)).data)
+            job = JobSerializer(jobobj[i]).data
+            recruiter = {}
+            recruiter.update(SignupSerializer(jobobj[i].recruiter).data)
+            recruiter.update(RecruiterProfileSerializer(RecruiterProfile.objects.get(recruiter=jobobj[i].recruiter.id)).data)
+            j = {}
+            j['job'] = job
+            j['recruiter'] = recruiter
+            data.append(j)
         return JsonResponse(data, safe=False)
     else:
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
