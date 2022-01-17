@@ -1,9 +1,13 @@
 .register {
   max-width: 650px;
   border-radius: 15px;
-  background: #fff;
   padding: 0;
-  padding-bottom: 1.8rem;
+  padding-bottom: 1rem;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
 .css-ve4m59-MuiFormLabel-root {
@@ -11,11 +15,11 @@
 }
 
 .register .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked {
-  color: #17684f;
+  color: var(--green);
 }
 
 .register .button {
-  background-color: #17684f;
+  background-color: var(--green);
   outline: none;
   border: 0;
   padding: 0.7rem 2rem;
@@ -26,7 +30,7 @@
 }
 
 .register .button:hover {
-  background-color: #073828;
+  background-color: #055d40;
 }
 
 .register .css-bz6wus-MuiInputBase-root-MuiOutlinedInput-root,
@@ -34,29 +38,58 @@
 .register .css-kzf2d7-MuiInputBase-root-MuiOutlinedInput-root {
   border-radius: 30px;
   padding: 0 0.8rem;
-  background-color: #ffffff;
+  background: #ffffffa1;
+  box-shadow: inset 13px 13px 33px #e6e6e6, inset -13px -13px 33px #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.075);
 }
 
 .register .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
-  border-width: 3px;
+  border-width: 1px;
 }
 
 .register .register-title {
-  background-color: #17684f;
-  color: #fff;
+  background-color: #ffffff71;
+  color: var(--green);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: 0 10px 20px rgba(155, 155, 155, 0.231);
 }
 
 .register .register-title svg {
-  color: #17684f;
+  color: #ffffff;
 }
 
 .register .icon-div {
   border-radius: 50%;
   margin-left: 1rem;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--green);
   transition: 0.3s ease;
 }
 
 .register .icon-div:hover {
   transform: translateX(-7px);
+}
+
+#reg-image {
+  max-width: 400px;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(45, 45, 45, 0.387);
+  padding: 1rem;
+  margin-left: 5vw;
+  border-radius: 20px;
+  margin-top: -10rem;
+  transform: rotate(-10deg);
+  animation: hang 2s 1s alternate infinite;
+  position: relative;
+  box-shadow: 0 0 20px rgba(128, 128, 128, 0.455);
+  -webkit-user-drag: none;
+}
+
+@keyframes hang {
+  0% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
 }

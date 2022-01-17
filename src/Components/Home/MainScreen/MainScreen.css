@@ -1,0 +1,24 @@
+.MainScreen button {
+  background-color: transparent;
+  color: black;
+}
+
+.MainScreen .css-1aquho2-MuiTabs-indicator {
+  background-color: var(--green);
+}
+
+.css-1ujykiq-MuiButtonBase-root-MuiTab-root.Mui-selected,
+.css-8je8zh-MuiTouchRipple-root {
+  color: var(--green) !important;
+}
+
+.css-19kzrtu {
+  padding: 0 !important;
+}
+
+.MainScreen .tab-container {
+  overflow: hidden;
+  height: 72vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}

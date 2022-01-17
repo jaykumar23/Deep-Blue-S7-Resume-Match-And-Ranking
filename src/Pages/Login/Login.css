@@ -1,10 +1,22 @@
+.main-container {
+  background: url("../../Assets/mesh-gradient.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 .login {
   border-radius: 15px;
   max-width: 1000px;
   padding: 0 1rem;
-  height: 90vh;
-  min-width: fit-content;
+  height: 80vh;
   min-height: fit-content;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
 .login .login-inputs input {
@@ -12,17 +24,25 @@
   color: rgb(54, 54, 54);
   text-decoration: none;
   margin: 0.5rem 0;
-  background-color: rgb(229, 229, 229);
+  /* background-color: rgba(255, 255, 255, 0.891); */
   outline: none;
   border: none;
   border-radius: 25px;
   padding: 0.7rem 2rem;
   width: 90%;
   max-width: 300px;
+  background: #ffffff;
+  box-shadow: inset 13px 13px 33px #e6e6e6, inset -13px -13px 33px #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.075);
 }
 
 .login .login-inputs input:focus-within {
   border: 2px solid rgb(0, 228, 0);
+}
+
+.login img {
+  max-height: 250px;
+  -webkit-user-drag: none;
 }
 
 .login button {
@@ -67,8 +87,19 @@
   bottom: 1.5rem;
   font-weight: 600;
   cursor: pointer;
+  transition: 0.3s ease;
+  width: fit-content;
 }
 
 .login #register-btn:hover {
   color: #17684f;
+}
+
+.login #register-btn svg {
+  transition: 0.3s ease;
+  transform: translate(2px);
+}
+
+.login #register-btn:hover svg {
+  transform: translateX(12px);
 }

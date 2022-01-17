@@ -1,0 +1,111 @@
+/* .home {
+  background-image: url("../../Assets/mesh-gradient.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+} */
+
+.home #upload-btn {
+  background-color: var(--green);
+  border: 0;
+  outline: none;
+  border-radius: 15px;
+  padding: 1rem;
+  width: 100%;
+  color: #fff;
+  font-size: 120%;
+  letter-spacing: 1px;
+  word-spacing: 3px;
+  transition: 0.3s ease;
+  min-width: fit-content;
+}
+
+.home .action-btn {
+  width: fit-content;
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  border-radius: 50%;
+  padding: 0.5rem;
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+}
+
+.home .action-btn:hover {
+  background-color: rgba(190, 238, 201, 0.245);
+}
+
+.home .search-bar input {
+  background-color: #5cb8431f;
+  outline: none;
+  border-radius: 10px;
+  padding: 0.5rem;
+  border: 0;
+  width: 70vw;
+  padding: 0.7rem 1rem;
+}
+
+.home .search-bar input:active,
+.home .search-bar input:focus-within,
+.home .search-bar input:hover {
+  background-color: #5cb84316;
+  box-shadow: 0 0 15px 2px#29292921;
+  border: 2px solid #5cb84340;
+}
+
+.home #upload-btn:hover {
+  background-color: var(--darkgreen);
+}
+
+.home .mainscreen {
+  border: 2px solid rgb(137, 137, 137);
+  border-radius: 15px;
+  height: 79vh;
+  overflow: hidden;
+}
+
+.MainScreen .css-1aquho2-MuiTabs-indicator {
+  height: 4px;
+  border-radius: 10px;
+}
+
+.home input[type="checkbox"] {
+  background: rgb(235, 235, 235);
+  width: 20px;
+  height: 20px;
+  aspect-ratio: 1;
+  border: 2px solid var(--darkgreen);
+  margin: 0;
+}
+
+.form-check-input {
+  border: 2px solid var(--darkgreen);
+  cursor: pointer;
+}
+
+.home input[type="checkbox"]:focus {
+  box-shadow: 0 !important;
+  border: 0;
+}
+
+.form-check-input:focus,
+.form-check-input:active {
+  border: 2px solid var(--darkgreen);
+  box-shadow: 0 0 0 transparent;
+}
+
+.home input[type="checkbox"]:checked {
+  background-color: var(--green);
+}
+
+.home #reloadButton:hover {
+  animation: wheel 1s;
+  /* transform: scale(1.2); */
+}
+
+@keyframes wheel {
+  100% {
+    transform: rotate(-360deg);
+  }
+}

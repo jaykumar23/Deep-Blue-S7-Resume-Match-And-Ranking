@@ -2,7 +2,7 @@
   "name": "deep-blue",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://c45b-2401-4900-1724-4e7a-6d-495d-ee22-a12f.ngrok.io/",
+  "proxy": "http://09df-2402-3a80-6f8-4faa-643b-1a4a-aa83-3d8a.ngrok.io",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",

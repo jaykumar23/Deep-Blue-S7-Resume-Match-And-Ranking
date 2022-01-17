@@ -2,20 +2,16 @@
 
 @import url(https://fonts.googleapis.com/css?family=DM+Sans:regular,italic,500,500italic,600,700,700italic,800);
 
+:root {
+  --green: #318a6e;
+  --darkgreen: #146048;
+}
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "DM Sans", sans-serif;
-}
-
-body {
-  background: rgb(1, 127, 141);
-  background: radial-gradient(
-    circle,
-    rgba(1, 127, 141, 1) 52%,
-    rgba(0, 68, 83, 1) 100%
-  );
+  font-family: "DM Sans", sans-serif !important;
 }
 
 .h1,
@@ -56,4 +52,25 @@ a {
 }
 .fw-800 {
   font-weight: 800;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--darkgreen);
 }

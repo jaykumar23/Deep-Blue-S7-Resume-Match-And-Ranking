@@ -5,7 +5,7 @@ const Error = () => {
     return (
         <>
             <Navbar />
-            <h4 className='text-light'>Error Page</h4>
+            <h4>Error Page</h4>
         </>
     )
 }

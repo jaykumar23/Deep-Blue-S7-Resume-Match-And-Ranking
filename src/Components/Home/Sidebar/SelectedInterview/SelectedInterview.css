@@ -1,0 +1,51 @@
+.selected-interview {
+  border: 2px solid rgb(154, 154, 154);
+  border-radius: 15px;
+  background-color: rgb(240, 240, 240);
+  height: 30vh;
+  overflow: hidden;
+}
+
+.selected-interview h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.selected-interview .list-div {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.selected-interview .interview-div {
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  padding: 0.2rem 0.6rem;
+  border: 2px solid rgb(201, 201, 201);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.selected-interview .interview-div:hover {
+  transform: translateY(-3px);
+}
+
+.selected-interview .status {
+  /* background-color: aqua; */
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.selected-interview .status[code="0"] {
+  background-color: grey;
+}
+.selected-interview .status[code="1"] {
+  background-color: rgb(255, 208, 0);
+}
+.selected-interview .status[code="2"] {
+  background-color: rgb(110, 220, 0);
+}
+.selected-interview .status[code="3"] {
+  background-color: rgb(255, 0, 0);
+}

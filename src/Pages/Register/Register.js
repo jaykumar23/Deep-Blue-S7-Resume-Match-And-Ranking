@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { } from './Register.css'
 import { NavLink } from 'react-router-dom';
+import image from '../../Assets/RegisterImg.svg'
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -89,8 +90,9 @@ export default class Register extends React.Component {
         const { first_name, last_name, password, gender, role, email, mobile_no, showPassword } = this.state;
         return (
             <>
-                <div className='d-flex align-items-center justify-content-center px-3 py-5' >
-                    <div className="register container bg-light overflow-hidden">
+                <div className='main-container d-flex align-items-center justify-content-center px-3 py-5' >
+                    <img src={image} className='img-fluid d-none d-lg-block' id="reg-image" alt="register" />
+                    <div className="register container overflow-hidden">
                         <div className="d-flex register-title align-items-center w-100 p-3 mb-3">
                             <NavLink to="/login">
                                 <div className="icon-div d-flex align-items-center justify-content-center p-1">
@@ -104,10 +106,10 @@ export default class Register extends React.Component {
                             <form onSubmit={this.submitHandler} className="row gy-4 gx-4" >
 
                                 <div className="col-md-6">
-                                    <TextField name="first_name" value={first_name} color='success' required id="outlined-basic" label="First Name" variant="outlined" fullWidth onChange={this.changeHandler} />
+                                    <TextField name="first_name" value={first_name} color='success' required label="First Name" variant="outlined" fullWidth onChange={this.changeHandler} />
                                 </div>
                                 <div className="col-md-6">
-                                    <TextField name="last_name" value={last_name} color='success' required id="outlined-basic" label="Last Name" variant="outlined" fullWidth onChange={this.changeHandler} />
+                                    <TextField name="last_name" value={last_name} color='success' required label="Last Name" variant="outlined" fullWidth onChange={this.changeHandler} />
                                 </div>
                                 <div className="col-md-6 ps-4">
                                     <FormControl component="fieldset" required className='ms-2'>
@@ -119,10 +121,10 @@ export default class Register extends React.Component {
                                     </FormControl>
                                 </div>
                                 <div className="col-md-6">
-                                    <TextField name="mobile_no" value={mobile_no} color='success' required type="number" id="outlined-basic" label="Mobile Number" variant="outlined" fullWidth onChange={this.changeHandler} />
+                                    <TextField name="mobile_no" value={mobile_no} color='success' required type="number" label="Mobile Number" variant="outlined" fullWidth onChange={this.changeHandler} />
                                 </div>
                                 <div className="col-md-12">
-                                    <TextField name="email" value={email} color='success' required type="email" id="outlined-basic" label="Email" variant="outlined" fullWidth onChange={this.changeHandler} />
+                                    <TextField name="email" value={email} color='success' required type="email" label="Email" variant="outlined" fullWidth onChange={this.changeHandler} />
                                 </div>
                                 <div className="col-md-12">
                                     <FormControl variant="outlined" fullWidth required color='success'>
@@ -167,7 +169,7 @@ export default class Register extends React.Component {
                                     </FormControl>
                                 </div>
                                 <div className="col-2">
-                                    <button type='submit' className='mt-4 button' >Submit</button>
+                                    <button type='submit' className='mt-2 ms-2 button' >Submit</button>
                                 </div>
 
                             </form>
