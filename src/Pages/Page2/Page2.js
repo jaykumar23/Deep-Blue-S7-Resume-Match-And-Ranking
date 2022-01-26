@@ -5,7 +5,7 @@ const Page2 = () => {
     return (
         <>
             <Navbar />
-            <h4 className='text-light'>Page 2</h4>
+            <h4 className='text'>Page 2</h4>
         </>
     )
 }

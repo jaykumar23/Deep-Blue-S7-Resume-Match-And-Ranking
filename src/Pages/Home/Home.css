@@ -99,13 +99,10 @@
   background-color: var(--green);
 }
 
-.home #reloadButton:hover {
-  animation: wheel 1s;
-  /* transform: scale(1.2); */
+.home #reloadButton {
+  transition: 0.3s ease;
 }
 
-@keyframes wheel {
-  100% {
-    transform: rotate(-360deg);
-  }
+.home #reloadButton:hover {
+  transform: rotate(-60deg);
 }

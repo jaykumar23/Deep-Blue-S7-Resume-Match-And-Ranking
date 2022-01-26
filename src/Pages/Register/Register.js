@@ -18,6 +18,8 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
+import { baseUrl } from '../../constants';
+import Spinner from '../../Components/Spinner/Spinner';
 
 
 
@@ -33,6 +35,7 @@ export default class Register extends React.Component {
             email: "",
             mobile_no: "",
             showPassword: false,
+            isLoading: false,
         }
     }
 
@@ -57,20 +60,25 @@ export default class Register extends React.Component {
     }
 
     submitHandler = (e) => {
+        this.setState({ isLoading: true })
         e.preventDefault();
-        axios.post('http://c45b-2401-4900-1724-4e7a-6d-495d-ee22-a12f.ngrok.io/api/signup/', this.state)
+        axios.post(`${baseUrl}/api/signup/`, this.state)
             .then(response => {
                 if (response.status === 201) {
+                    this.setState({ isLoading: false })
                     alert("Account Created")
                 }
             })
             .catch((error) => {
                 if (error.response.status === 406) {
                     alert("User already exist")
+                    this.setState({ isLoading: false })
                 } else if (error.response.status === 204) {
                     alert("Coudln't get data from site")
+                    this.setState({ isLoading: false })
                 } else {
                     alert("Something Went Wrong!")
+                    this.setState({ isLoading: false })
                 }
             })
     }
@@ -94,7 +102,7 @@ export default class Register extends React.Component {
                     <img src={image} className='img-fluid d-none d-lg-block' id="reg-image" alt="register" />
                     <div className="register container overflow-hidden">
                         <div className="d-flex register-title align-items-center w-100 p-3 mb-3">
-                            <NavLink to="/login">
+                            <NavLink to="/">
                                 <div className="icon-div d-flex align-items-center justify-content-center p-1">
                                     <ArrowBackIcon />
                                 </div>
@@ -168,8 +176,11 @@ export default class Register extends React.Component {
                                         </Select>
                                     </FormControl>
                                 </div>
+
                                 <div className="col-2">
-                                    <button type='submit' className='mt-2 ms-2 button' >Submit</button>
+                                    <button type='submit' className={this.state.isLoading ? "bg-dark mt-2 ms-2 button" : "mt-2 ms-2 button"}>
+                                        {this.state.isLoading ? <Spinner /> : "Submit"}
+                                    </button>
                                 </div>
 
                             </form>

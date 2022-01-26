@@ -9,8 +9,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 export default class Home extends React.Component {
-
-
     render() {
         return (
             <>

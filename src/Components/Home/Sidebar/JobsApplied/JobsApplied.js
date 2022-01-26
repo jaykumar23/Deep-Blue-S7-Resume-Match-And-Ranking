@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
 import { } from './JobsApplied.css'
 import axios from "axios"
+import { baseUrl } from '../../../../constants'
+import Spinner from '../../../Spinner/Spinner'
 
 export default class JobsApplied extends Component {
 
     state = {
-        jobsApplied: []
+        jobsApplied: [],
+        isLoading: true,
     }
 
     componentDidMount() {
-        axios.get("http://e2b2-2402-3a80-1865-75da-b99b-9d94-a0bb-12ab.ngrok.io/api/applied_jobs/1")
+        axios.get(`${baseUrl}/api/applied_jobs/1`)
             .then(res => {
+                this.setState({ isLoading: true })
                 this.setState({ jobsApplied: res.data })
+                this.setState({ isLoading: false })
             })
             .catch(err => {
                 console.log(err);
@@ -24,7 +29,7 @@ export default class JobsApplied extends Component {
                 <div className="jobs-applied container-fluid p-2 m-0">
                     <h3 className='text-center fw-600' >Jobs Applied</h3>
                     <div className="job-container container-fluid p-0 ">
-
+                        {this.state.isLoading ? <Spinner /> : ""}
                         {this.state.jobsApplied.map((curElem, index) => {
                             return (
                                 <div className="job-div my-2" key={index} >

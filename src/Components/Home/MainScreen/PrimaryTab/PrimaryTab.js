@@ -1,18 +1,22 @@
 import React, { Component } from 'react'
 import { } from './PrimaryTab.css'
 import axios from "axios"
+import { baseUrl } from '../../../../constants'
+import Spinner from '../../../Spinner/Spinner'
 
 export default class PrimaryTab extends Component {
 
     state = {
-        primaryOffers: []
+        primaryOffers: [],
+        isLoading: true,
     }
 
     componentDidMount() {
-        axios.get("http://e2b2-2402-3a80-1865-75da-b99b-9d94-a0bb-12ab.ngrok.io/api/all_job/")
+        axios.get(`${baseUrl}/api/all_job/`)
             .then(res => {
-                // console.log(res.data);
+                this.setState({ isLoading: true })
                 this.setState({ primaryOffers: res.data })
+                this.setState({ isLoading: false })
             })
             .catch(err => {
                 console.log(err);
@@ -23,6 +27,8 @@ export default class PrimaryTab extends Component {
 
         return (
             <>
+
+                {this.state.isLoading ? <Spinner /> : ""}
                 {this.state.primaryOffers.map((curElem, index) => {
                     return (
                         <div className="conatiner-fluid tab-card" key={index}>

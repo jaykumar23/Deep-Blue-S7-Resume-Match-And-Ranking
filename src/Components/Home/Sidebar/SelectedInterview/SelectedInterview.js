@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
 import { } from './SelectedInterview.css'
 import axios from "axios"
+import { baseUrl } from '../../../../constants'
+import Spinner from '../../../Spinner/Spinner'
 
 export default class SelectedInterview extends Component {
     state = {
-        selected: []
+        selected: [],
+        isLoading: true,
     }
 
     componentDidMount() {
-        axios.get("http://e2b2-2402-3a80-1865-75da-b99b-9d94-a0bb-12ab.ngrok.io/api/applied_job/1")
+        axios.get(`${baseUrl}/api/applied_job/1`)
             .then(res => {
                 // console.log(res.data);
+                this.setState({ isLoading: true })
                 this.setState({ selected: res.data })
+                this.setState({ isLoading: false })
             })
             .catch(err => {
                 console.log(err);
@@ -25,6 +30,7 @@ export default class SelectedInterview extends Component {
                 <div className="selected-interview container-fluid p-2 my-4 my-lg-2 ">
                     <h5 className='text-center'>Selected For Interview</h5>
                     <div className="list-div pb-3">
+                        {this.state.isLoading ? <Spinner /> : ""}
                         {this.state.selected.map((curElem, index) => {
                             let selectStatus = curElem.job.status;
                             switch (selectStatus) {

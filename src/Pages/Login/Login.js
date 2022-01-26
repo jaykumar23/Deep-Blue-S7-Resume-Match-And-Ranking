@@ -4,6 +4,8 @@ import axios from 'axios';
 import image from '../../Assets/LoginHome.svg'
 import { NavLink } from 'react-router-dom'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { baseUrl } from '../../constants'
+import Spinner from '../../Components/Spinner/Spinner';
 
 
 export default class Login extends Component {
@@ -11,7 +13,8 @@ export default class Login extends Component {
         super(props)
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            isLoading: false,
         }
     }
 
@@ -21,20 +24,25 @@ export default class Login extends Component {
     }
 
     submitHandler = (e) => {
+        this.setState({ isLoading: true })
+        console.log(`${baseUrl}/api/login`);
         e.preventDefault();
-        axios.post('http://c45b-2401-4900-1724-4e7a-6d-495d-ee22-a12f.ngrok.io/api/login/', this.state)
+        axios.post(`${baseUrl}/api/login/`, this.state)
             .then(response => {
                 if (response.status === 200) {
                     alert("Login Successfull")
                     localStorage.setItem("USER_ID", response.data.id);
                     localStorage.setItem("USER_NAME", response.data.first_name);
+                    this.setState({ isLoading: false })
                 }
             })
             .catch((error) => {
                 if (error.response.status === 401 || error.response.status === 400) {
                     alert("Invalid Credential")
+                    this.setState({ isLoading: false })
                 } else {
                     alert("Something Went Wrong!")
+                    this.setState({ isLoading: false })
                 }
             })
     }
@@ -42,7 +50,7 @@ export default class Login extends Component {
     logout = () => {
         const id = localStorage.getItem("USER_ID");
         const name = localStorage.getItem("USER_NAME");
-        axios.post(`http://c45b-2401-4900-1724-4e7a-6d-495d-ee22-a12f.ngrok.io/api/logout/${id}`,)
+        axios.post(`${baseUrl}/api/logout/${id}`,)
             .then(response => {
                 if (response.status === 200) {
                     alert(`${name}, Logout Successfull!`)
@@ -72,7 +80,9 @@ export default class Login extends Component {
                                     <form onSubmit={this.submitHandler} className='d-flex flex-column justify-content-center align-items-center w-100'>
                                         <input name="email" type="email" placeholder='Email' required id='email' autoComplete='off' value={email} onChange={this.changeHandler} />
                                         <input name="password" type="password" placeholder='Password' required id='password' value={password} onChange={this.changeHandler} />
-                                        <button type='submit' >Login</button>
+                                        <button type='submit' className={this.state.isLoading ? "bg-dark" : ""}>
+                                            {this.state.isLoading ? <Spinner /> : "Login"}
+                                        </button>
                                     </form>
                                 </div>
 
