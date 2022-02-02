@@ -76,9 +76,11 @@ export default class Register extends React.Component {
                 } else if (error.response.status === 204) {
                     alert("Coudln't get data from site")
                     this.setState({ isLoading: false })
+                    window.location.reload()
                 } else {
                     alert("Something Went Wrong!")
                     this.setState({ isLoading: false })
+                    window.location.reload()
                 }
             })
     }
