@@ -7,7 +7,7 @@ export default class Sidebar extends Component {
     render() {
         return (
             <>
-                <div className="sidebar container-fluid p-1 ">
+                <div className="sidebar container-fluid p-1 d-none d-md-block">
                     <JobsApplied />
                     <SelectedInterview />
                 </div>

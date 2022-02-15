@@ -9,10 +9,13 @@ export default class JobsApplied extends Component {
     state = {
         jobsApplied: [],
         isLoading: true,
+        USER_ID: localStorage.getItem("USER_ID")
     }
 
+
+
     componentDidMount() {
-        axios.get(`${baseUrl}/api/applied_jobs/1`)
+        axios.get(`${baseUrl}/api/applied_jobs/${this.state.USER_ID}`)
             .then(res => {
                 this.setState({ isLoading: true })
                 this.setState({ jobsApplied: res.data })

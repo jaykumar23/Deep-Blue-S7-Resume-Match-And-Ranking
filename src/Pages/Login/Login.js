@@ -25,15 +25,17 @@ export default class Login extends Component {
 
     submitHandler = (e) => {
         this.setState({ isLoading: true })
-        console.log(`${baseUrl}/api/login`);
+        // console.log(`${baseUrl}/api/login`);
         e.preventDefault();
         axios.post(`${baseUrl}/api/login/`, this.state)
             .then(response => {
                 if (response.status === 200) {
-                    alert("Login Successfull")
+                    // alert("Login Successfull")
+                    localStorage.setItem("isLoggedIn", "true");
                     localStorage.setItem("USER_ID", response.data.id);
                     localStorage.setItem("USER_NAME", response.data.first_name);
                     this.setState({ isLoading: false })
+                    window.location.reload()
                 }
             })
             .catch((error) => {

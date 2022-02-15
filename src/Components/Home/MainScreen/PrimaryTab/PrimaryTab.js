@@ -3,6 +3,7 @@ import { } from './PrimaryTab.css'
 import axios from "axios"
 import { baseUrl } from '../../../../constants'
 import Spinner from '../../../Spinner/Spinner'
+import { Link } from 'react-router-dom'
 
 export default class PrimaryTab extends Component {
 
@@ -14,6 +15,7 @@ export default class PrimaryTab extends Component {
     componentDidMount() {
         axios.get(`${baseUrl}/api/all_job/`)
             .then(res => {
+                // console.log(res);
                 this.setState({ isLoading: true })
                 this.setState({ primaryOffers: res.data })
                 this.setState({ isLoading: false })
@@ -27,15 +29,16 @@ export default class PrimaryTab extends Component {
 
         return (
             <>
-
                 {this.state.isLoading ? <Spinner /> : ""}
                 {this.state.primaryOffers.map((curElem, index) => {
                     return (
-                        <div className="conatiner-fluid tab-card" key={index}>
-                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                            <h5>{curElem.recruiter.company_name}</h5>
-                            <p>{`Description: ${curElem.job.job_description} | and | ${curElem.job.perks}`}</p>
-                        </div>
+                        <Link to={{ pathname: "view/" + (index + 1) }} state={{ ...curElem }}>
+                            <div className="conatiner-fluid tab-card" key={index}>
+                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <h5>{curElem.recruiter.company_name}</h5>
+                                <p>{`Description: ${curElem.job.job_description} | and | ${curElem.job.perks}`}</p>
+                            </div>
+                        </Link>
                     )
 
                 })}

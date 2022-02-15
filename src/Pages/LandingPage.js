@@ -4,16 +4,16 @@ import { BrowserRouter } from 'react-router-dom';
 import LoginRegister from './LoginRegister';
 
 const LandingPage = () => {
-    const local = localStorage.getItem("isLoggedIn")
+    const currLoginStatus = localStorage.getItem("isLoggedIn")
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        if (local) {
-            (local === "true" ? setIsLoggedIn(true) : setIsLoggedIn(false))
+        if (currLoginStatus) {
+            (currLoginStatus === "true" ? setIsLoggedIn(true) : setIsLoggedIn(false))
         } else {
             localStorage.setItem("isLoggedIn", "false")
         }
-    }, []);
+    }, [currLoginStatus]);
 
     return (
         <BrowserRouter>

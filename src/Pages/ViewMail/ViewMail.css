@@ -1,0 +1,121 @@
+.ViewJob .backToHome {
+  padding: 0.7rem 0;
+}
+
+.ViewJob .backToHome p {
+  color: rgb(138, 138, 138);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.ViewJob .css-i4bv87-MuiSvgIcon-root {
+  color: rgb(138, 138, 138);
+  width: 20px;
+}
+
+.ViewJob .backToHome a:hover p,
+.ViewJob .backToHome a:hover .css-i4bv87-MuiSvgIcon-root {
+  color: var(--green);
+}
+
+.ViewJob .top-div {
+  background-color: var(--green);
+  padding: 0.6rem;
+}
+
+.ViewJob #designation {
+  color: rgb(255, 255, 255);
+}
+
+.ViewJob #company-name {
+  color: rgb(255, 255, 255);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.ViewJob #company-name .css-i4bv87-MuiSvgIcon-root {
+  color: rgb(255, 255, 255);
+  width: 20px;
+}
+
+.ViewJob .location .css-i4bv87-MuiSvgIcon-root {
+  color: rgb(255, 255, 255);
+  width: 15px;
+}
+
+.ViewJob #applyButton {
+  background-color: var(--green);
+}
+
+.ViewJob #applyButton {
+  padding: 0.5rem 2.5rem;
+  border: 3px solid #fff;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  transition: 0.3s;
+  z-index: 1;
+  font-family: inherit;
+  color: #fff;
+  border-radius: 12px;
+  font-weight: 600;
+  min-width: fit-content;
+}
+
+.ViewJob #applyButton::before {
+  content: "";
+  width: 0;
+  height: 1000%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: #fff;
+  transition: 0.5s ease;
+  display: block;
+  z-index: -1;
+}
+
+.ViewJob #applyButton:hover::before {
+  width: 105%;
+}
+
+.ViewJob #applyButton:hover {
+  color: var(--green);
+}
+
+.ViewJob .location p {
+  color: rgb(111, 111, 111);
+}
+
+.ViewJob .jobInfo {
+  border: 2.5px solid rgb(226, 226, 226);
+  border-radius: 13px;
+  padding: 0.5rem 1rem;
+  width: 13rem;
+}
+
+.ViewJob .container-title {
+  height: 70vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.ViewJob .company-link {
+  color: rgb(96, 96, 96);
+  font-weight: 500;
+}
+.ViewJob .company-link:hover {
+  color: rgb(18, 10, 255);
+  text-decoration: underline;
+}
+
+.ViewJob .title {
+  font-weight: 600;
+  color: #000;
+  font-size: 1.1rem;
+}

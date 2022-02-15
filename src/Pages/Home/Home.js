@@ -7,6 +7,8 @@ import MainScreen from '../../Components/Home/MainScreen/MainScreen';
 import ReplayIcon from '@mui/icons-material/Replay';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { Route, Routes } from 'react-router-dom';
+import ViewMail from '../ViewMail/ViewMail';
 
 export default class Home extends React.Component {
     render() {
@@ -28,7 +30,6 @@ export default class Home extends React.Component {
                             <div className="search-bar">
                                 <input type="text" placeholder='Search Here...' />
                             </div>
-
                             <div className=" d-flex">
                                 <div>
                                 </div>
@@ -46,7 +47,10 @@ export default class Home extends React.Component {
                             <Sidebar />
                         </div>
                         <div className="col-md-9 col-lg-10 p-0 mainscreen mb-3">
-                            <MainScreen />
+                            <Routes>
+                                <Route path="" element={<MainScreen />} />
+                                <Route exact path="view/:id" element={<ViewMail />} />
+                            </Routes>
                         </div>
                     </div>
                 </div>

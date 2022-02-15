@@ -38,6 +38,10 @@ a {
   color: initial;
 }
 
+a:hover {
+  color: initial;
+}
+
 .fw-400 {
   font-weight: 400;
 }

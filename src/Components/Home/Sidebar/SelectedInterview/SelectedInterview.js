@@ -8,10 +8,11 @@ export default class SelectedInterview extends Component {
     state = {
         selected: [],
         isLoading: true,
+        USER_ID: localStorage.getItem("USER_ID")
     }
 
     componentDidMount() {
-        axios.get(`${baseUrl}/api/applied_job/1`)
+        axios.get(`${baseUrl}/api/applied_job/${this.state.USER_ID}`)
             .then(res => {
                 // console.log(res.data);
                 this.setState({ isLoading: true })
