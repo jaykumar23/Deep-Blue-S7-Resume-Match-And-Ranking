@@ -11,9 +11,63 @@
   font-size: 1.6rem;
 }
 
-.navbar a {
-  text-decoration: none;
-  font-size: 1.3rem;
+.navbar a .avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(72, 72, 72);
+  background-color: white;
   font-weight: 600;
-  margin-right: 1rem;
+  letter-spacing: 1px;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.navbar #name {
+  font-weight: 500;
+}
+
+.navbar #role {
+  font-size: 0.8rem;
+}
+
+.navbar .drop-down {
+  position: absolute;
+  background-color: var(--green);
+  right: 2.5rem;
+  top: 4rem;
+  font-size: 1.1rem;
+  padding: 0.8rem 0.7rem;
+  border-radius: 10px;
+  font-weight: 600;
+  animation: slide 0.3s;
+}
+
+.navbar .drop-down a {
+  color: #fff;
+}
+
+.navbar .drop-link {
+  padding: 0.3rem 0.9rem;
+  margin: 0;
+  border-radius: 5px;
+}
+
+.navbar .drop-link:hover {
+  background-color: var(--darkgreen);
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
