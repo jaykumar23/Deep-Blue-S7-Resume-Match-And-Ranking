@@ -19,6 +19,7 @@
   word-spacing: 3px;
   transition: 0.3s ease;
   min-width: fit-content;
+  font-weight: 500;
 }
 
 .home .action-btn {
@@ -50,7 +51,7 @@
 .home .search-bar input:focus-within,
 .home .search-bar input:hover {
   background-color: #5cb84316;
-  box-shadow: 0 0 15px 2px#29292921;
+  box-shadow: 0 0 5px 0px#29292915;
   border: 2px solid #5cb84340;
 }
 

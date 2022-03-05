@@ -20,6 +20,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
 import { baseUrl } from '../../constants';
 import Spinner from '../../Components/Spinner/Spinner';
+import validator from 'validator'
 
 
 
@@ -60,29 +61,38 @@ export default class Register extends React.Component {
     }
 
     submitHandler = (e) => {
-        this.setState({ isLoading: true })
         e.preventDefault();
-        axios.post(`${baseUrl}/api/signup/`, this.state)
-            .then(response => {
-                if (response.status === 201) {
-                    this.setState({ isLoading: false })
-                    alert("Account Created")
-                }
-            })
-            .catch((error) => {
-                if (error.response.status === 406) {
-                    alert("User already exist")
-                    this.setState({ isLoading: false })
-                } else if (error.response.status === 204) {
-                    alert("Coudln't get data from site")
-                    this.setState({ isLoading: false })
-                    window.location.reload()
-                } else {
-                    alert("Something Went Wrong!")
-                    this.setState({ isLoading: false })
-                    window.location.reload()
-                }
-            })
+        if (validator.isEmpty(this.state.first_name) || validator.isEmpty(this.state.last_name) || validator.isEmpty(this.state.gender) || validator.isEmpty(this.state.mobile_no) || validator.isEmpty(this.state.email || validator.isEmpty(this.state.password))) {
+            alert("Fields cannot be empty")
+        } else if (this.state.role.trim() === "") {
+            alert("Select valid role")
+        } else if (!validator.isStrongPassword(this.state.password)) {
+            alert("Enter strong password \nMinimum 8 characters, atlest 1 Uppercase , atlest 1 lowercase, atlest 1 Number[0-9] , atlest 1 symbol [$,@,%] ")
+        }
+        else {
+            this.setState({ isLoading: true })
+            axios.post(`${baseUrl}/api/signup/`, this.state)
+                .then(response => {
+                    if (response.status === 201) {
+                        this.setState({ isLoading: false })
+                        alert("Account Created")
+                    }
+                })
+                .catch((error) => {
+                    if (error.response.status === 406) {
+                        alert("User already exist")
+                        this.setState({ isLoading: false })
+                    } else if (error.response.status === 204) {
+                        alert("Coudln't get data from site")
+                        this.setState({ isLoading: false })
+                        window.location.reload()
+                    } else {
+                        alert("Something Went Wrong!")
+                        this.setState({ isLoading: false })
+                        window.location.reload()
+                    }
+                })
+        }
     }
 
 
@@ -116,13 +126,13 @@ export default class Register extends React.Component {
                             <form onSubmit={this.submitHandler} className="row gy-4 gx-4" >
 
                                 <div className="col-md-6">
-                                    <TextField name="first_name" value={first_name} color='success' required label="First Name" variant="outlined" fullWidth onChange={this.changeHandler} />
+                                    <TextField required name="first_name" value={first_name} color='success' label="First Name" variant="outlined" fullWidth onChange={this.changeHandler} />
                                 </div>
                                 <div className="col-md-6">
-                                    <TextField name="last_name" value={last_name} color='success' required label="Last Name" variant="outlined" fullWidth onChange={this.changeHandler} />
+                                    <TextField required name="last_name" value={last_name} color='success' label="Last Name" variant="outlined" fullWidth onChange={this.changeHandler} />
                                 </div>
                                 <div className="col-md-6 ps-4">
-                                    <FormControl component="fieldset" required className='ms-2'>
+                                    <FormControl component="fieldset" className='ms-2'>
                                         <FormLabel component="legend" color='success'>Gender</FormLabel>
                                         <RadioGroup row aria-label="gender" name="gender" color='success' value={gender} onChange={this.changeHandler}>
                                             <FormControlLabel value="male" control={<Radio />} label="Male" />
@@ -131,13 +141,13 @@ export default class Register extends React.Component {
                                     </FormControl>
                                 </div>
                                 <div className="col-md-6">
-                                    <TextField name="mobile_no" value={mobile_no} color='success' required type="number" label="Mobile Number" variant="outlined" fullWidth onChange={this.changeHandler} />
+                                    <TextField required name="mobile_no" value={mobile_no} color='success' type="number" label="Mobile Number" variant="outlined" fullWidth onChange={this.changeHandler} />
                                 </div>
                                 <div className="col-md-12">
-                                    <TextField name="email" value={email} color='success' required type="email" label="Email" variant="outlined" fullWidth onChange={this.changeHandler} />
+                                    <TextField required name="email" value={email} color='success' type="email" label="Email" variant="outlined" fullWidth onChange={this.changeHandler} />
                                 </div>
                                 <div className="col-md-12">
-                                    <FormControl variant="outlined" fullWidth required color='success'>
+                                    <FormControl variant="outlined" fullWidth color='success'>
                                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                                         <OutlinedInput
                                             name="password"
@@ -164,11 +174,11 @@ export default class Register extends React.Component {
 
 
                                 <div className="col-md-12">
-                                    <FormControl required fullWidth color='success'>
-                                        <InputLabel id="demo-simple-select-required-label">Role</InputLabel>
+                                    <FormControl fullWidth color='success'>
+                                        <InputLabel id="demo-simple-select--label">Role</InputLabel>
                                         <Select name="role" value={role}
-                                            labelId="demo-simple-select-required-label"
-                                            id="demo-simple-select-required"
+                                            labelId="demo-simple-select--label"
+                                            id="demo-simple-select-"
                                             label="Role"
                                             onChange={this.changeHandler}
                                         >

@@ -26,16 +26,15 @@ const Navbar = () => {
         <>
             <nav className="navbar navbar-expand-md navbar-dark py-0 px-md-2 px-lg-3 d-flex align-items-center">
                 <div className="container-fluid">
-                    <NavLink className="navbar-brand fw-700" to="/">Resume Matching</NavLink>
+                    <NavLink to="/home">
+                        <div className="navbar-brand fw-700" >Resume Matching</div>
+                    </NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav ms-auto">
-                            {/* <NavLink className="nav-link " aria-current="page" to="/">Home</NavLink>
-                            <NavLink className="nav-link" to="/page2">Page2</NavLink>
-                            <NavLink className="nav-link" to="/error">Error</NavLink> */}
-                            <NavLink className="nav-link d-flex" to="#" onClick={openDropDown}>
+                            <div className="nav-link d-flex" onClick={openDropDown}>
                                 <div className="details me-3 text-end">
                                     <p id='name'>{fName} {lName}</p>
                                     <p id='role'>{role}</p>
@@ -43,13 +42,13 @@ const Navbar = () => {
                                 <div className="avatar">{avatar}</div>
                                 <div className={`drop-down ${dropDown === false ? "d-none" : ""} `}>
                                     <div className="drop-link">
-                                        <NavLink to="#">Profile</NavLink>
+                                        <NavLink to="/profile">Profile</NavLink>
                                     </div>
                                     <div className="drop-link" onClick={handleLogout}>
                                         <p>Logout</p>
                                     </div>
                                 </div>
-                            </NavLink>
+                            </div>
 
                         </div>
                     </div>

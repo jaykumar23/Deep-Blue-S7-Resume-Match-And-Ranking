@@ -1,1 +1,1 @@
-export const baseUrl = "http://7a58-2401-4900-1d14-81d9-59de-66ee-ce45-3db0.ngrok.io";
+export const baseUrl = "http://f935-2401-4900-172c-bc71-f56b-266a-a32b-2575.ngrok.io";

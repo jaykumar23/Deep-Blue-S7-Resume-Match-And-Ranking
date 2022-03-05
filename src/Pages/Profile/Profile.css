@@ -1,0 +1,59 @@
+.container.profile {
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 70vh;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.129);
+  max-width: 800px;
+  margin-bottom: 2rem;
+}
+
+.profile .top {
+  background-color: var(--green);
+  padding: 1rem;
+  height: 20vh;
+}
+
+.display {
+  margin-top: 3%;
+  margin-left: 1rem;
+}
+
+.display .avatar {
+  width: 16%;
+  min-width: 5rem;
+  height: auto;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.177);
+  font-size: 3rem;
+  letter-spacing: 3px;
+  color: rgba(0, 0, 0, 0.496);
+  font-weight: 500;
+  user-select: none;
+}
+
+.display #name {
+  font-size: 230%;
+  font-weight: 500;
+  color: #fff;
+}
+
+.profile .bottom .info-div {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.profile .bottom .info-div .title {
+  font-weight: 600;
+}
+
+.profile .css-i4bv87-MuiSvgIcon-root {
+  color: #fff;
+  transform: scale(1.3);
+}
