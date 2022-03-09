@@ -29,7 +29,7 @@ export default class SelectedInterview extends Component {
         return (
             <>
                 <div className="selected-interview container-fluid p-2 my-4 my-lg-2 ">
-                    <h5 className='text-center'>Selected For Interview</h5>
+                    <h5 className='text-center'>Check Status</h5>
                     <div className="list-div pb-3">
                         {this.state.isLoading ? <Spinner /> : ""}
                         {this.state.selected.map((curElem, index) => {

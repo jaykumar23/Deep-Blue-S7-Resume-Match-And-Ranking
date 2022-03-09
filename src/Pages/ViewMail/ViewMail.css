@@ -44,11 +44,11 @@
   width: 15px;
 }
 
-.ViewJob #applyButton {
+.ViewJob .applyButton {
   background-color: var(--green);
 }
 
-.ViewJob #applyButton {
+.ViewJob .applyButton {
   padding: 0.5rem 2.5rem;
   border: 3px solid #fff;
   position: relative;
@@ -66,7 +66,7 @@
   min-width: fit-content;
 }
 
-.ViewJob #applyButton::before {
+.ViewJob .applyButton::before {
   content: "";
   width: 0;
   height: 1000%;
@@ -80,11 +80,11 @@
   z-index: -1;
 }
 
-.ViewJob #applyButton:hover::before {
+.ViewJob .applyButton:hover::before {
   width: 105%;
 }
 
-.ViewJob #applyButton:hover {
+.ViewJob .applyButton:hover {
   color: var(--green);
 }
 

@@ -76,6 +76,7 @@ export default class Register extends React.Component {
                     if (response.status === 201) {
                         this.setState({ isLoading: false })
                         alert("Account Created")
+                        window.location.href = "/"
                     }
                 })
                 .catch((error) => {

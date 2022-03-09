@@ -43,7 +43,7 @@
   border-radius: 10px;
   padding: 0.5rem;
   border: 0;
-  width: 70vw;
+  width: 75vw;
   padding: 0.7rem 1rem;
 }
 
@@ -106,4 +106,15 @@
 
 .home #reloadButton:hover {
   transform: rotate(-60deg);
+}
+
+.home input#upload {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+.home .modal-dialog .spinner-border {
+  width: 1rem;
+  height: 1rem;
 }

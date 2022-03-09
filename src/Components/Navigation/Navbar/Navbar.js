@@ -1,25 +1,34 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import './Navbar.css'
+import { baseUrl } from '../../../constants'
 
 const Navbar = () => {
 
     const [dropDown, setDropDown] = useState(false)
 
-    const fName = "Karan"
-    const lName = "Sandhu"
-    const role = "Applicant"
+    const fName = localStorage.getItem("USER_FNAME");
+    const lName = localStorage.getItem("USER_LNAME")
+    const role = localStorage.getItem("USER_ROLE")
 
     const avatar = `${fName.slice(0, 1)}${lName.slice(0, 1)}`
-    console.log(avatar);
 
     const openDropDown = () => {
         setDropDown(!dropDown)
     }
 
     const handleLogout = () => {
-        localStorage.clear()
-        window.location.reload()
+        const id = localStorage.getItem("USER_ID")
+        axios.post(`${baseUrl}/api/logout/${id}`)
+            .then((res) => {
+                alert("Logout successfull")
+                localStorage.clear()
+                window.location.reload()
+            }).catch((e) => {
+                alert("Somethig went wrong!")
+            })
+
     }
 
     return (

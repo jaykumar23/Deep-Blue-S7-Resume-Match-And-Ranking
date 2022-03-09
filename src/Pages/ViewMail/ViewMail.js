@@ -18,21 +18,44 @@ import DateRangeIcon from '@mui/icons-material/DateRange';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import { baseUrl } from '../../constants';
+import axios from 'axios';
 
 class ViewMailCC extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            job: `${this.props.location.state.job.id}`,
+            applicant: `${localStorage.getItem("USER_ID")}`,
+            status: `0`,
+            isLoading: false,
+        }
+    }
     render() {
-        console.log(this.props.location.state);
-        const { job, recruiter } = this.props.location.state
-
+        console.log(this.props.location.state.job);
+        const { job, recruiter, status } = this.props.location.state
         const viewWebsite = (link) => {
             window.location.href = link
+        }
+
+        const applyJob = () => {
+            this.setState({ isLoading: true })
+            axios.post(`${baseUrl}/api/apply/`, this.state)
+                .then((res) => {
+                    alert("Applied")
+                    this.setState({ isLoading: false })
+                    window.location.href = "/home"
+                }).catch((e) => {
+                    alert("Something went wrong!")
+                    this.setState({ isLoading: false })
+                })
         }
 
         return (
             <>
                 <div className="container-fluid ViewJob p-0">
                     <div className="backToHome ps-3">
-                        <Link to="/" className="d-flex align-items-center">
+                        <Link to="/home" className="d-flex align-items-center">
                             <ArrowBackIosIcon />
                             <p>Back to Jobs </p>
                         </Link>
@@ -49,9 +72,13 @@ class ViewMailCC extends React.Component {
                                             <p className='text-light'>{job.location}</p>
                                         </div>
                                     </div>
-                                    <button id='applyButton' className='my-3 my-md-0'>
-                                        Apply Now
-                                    </button>
+                                    {status === "0" ? <button className='applyButton disabled my-3 my-md-0' disabled={true} style={{ cursor: "not-allowed", opacity: "0.7" }}>
+                                        Already Applied
+                                    </button> : <button className='applyButton my-3 my-md-0' onClick={() => applyJob(job.id)}>
+                                        {this.state.isLoading === true ? <div class="spinner-border text-success" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div> : "Apply"}
+                                    </button>}
                                 </div>
                                 <div className="container-fluid main-cover">
                                     <div className="details d-flex align-items-center justify-content-center justify-content-lg-start w-100 flex-wrap my-3 w-100">
@@ -138,7 +165,6 @@ class ViewMailCC extends React.Component {
 
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>

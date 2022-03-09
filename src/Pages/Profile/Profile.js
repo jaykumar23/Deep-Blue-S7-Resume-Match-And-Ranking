@@ -5,9 +5,9 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { NavLink } from 'react-router-dom'
 
 const Profile = () => {
-    const fName = "Karan"
-    const lName = "Sandhu"
-    const role = "Applicant"
+    const fName = localStorage.getItem("USER_FNAME");
+    const lName = localStorage.getItem("USER_LNAME");
+    const role = localStorage.getItem("USER_ROLE")
 
     const avatar = `${fName.slice(0, 1)}${lName.slice(0, 1)}`
     console.log(avatar);
@@ -23,35 +23,36 @@ const Profile = () => {
                             </NavLink>
                             <h3 className='text-light ms-3'>Profile</h3>
                         </div>
-                        <div className="display d-flex align-items-top justify-content-start">
+                        <div className="display d-flex align-items-center justify-content-start">
                             <div className="avatar me-3">{avatar}</div>
-                            <div className="display-info">
-                                <p id='name'>Karandeep Sandhu</p>
+                            <div className="display-info d-flex align-items-center justify-content-between w-100">
+                                <p id='name'>{fName} {lName}</p>
+                                <p className='text-light me-3'>{localStorage.getItem("USER_ROLE")}</p>
                             </div>
                         </div>
                     </div>
                     <div className="bottom">
-                        <div className="container m-5 p-2 py-3">
+                        <div className="container m-3 p-2 py-3">
 
                             <div className="d-flex info-div">
-                                <p className='title'>Mobile No. :</p>
-                                <p className='info'>7977215936</p>
+                                <p className='title'>Email :</p>
+                                <p className='info'>{localStorage.getItem("USER_EMAIL")}</p>
                             </div>
                             <div className="d-flex info-div">
                                 <p className='title'>Mobile No. :</p>
-                                <p className='info'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, quidem!</p>
+                                <p className='info'>{localStorage.getItem("USER_MOBILE")}</p>
                             </div>
                             <div className="d-flex info-div">
-                                <p className='title'>Mobile No. :</p>
-                                <p className='info'>7977215936</p>
+                                <p className='title'>Gender :</p>
+                                <p className='info'>{localStorage.getItem("USER_GENDER")}</p>
                             </div>
                             <div className="d-flex info-div">
-                                <p className='title'>Mobile No. :</p>
-                                <p className='info'>7977215936</p>
+                                <p className='title'>Eduction :</p>
+                                <p className='info'>{localStorage.getItem("USER_EDUCATION")}</p>
                             </div>
                             <div className="d-flex info-div">
-                                <p className='title'>Mobile No. :</p>
-                                <p className='info'>7977215936</p>
+                                <p className='title'>Skills :</p>
+                                <p className='info'>{localStorage.getItem("USER_SKILLS")}</p>
                             </div>
                         </div>
                     </div>

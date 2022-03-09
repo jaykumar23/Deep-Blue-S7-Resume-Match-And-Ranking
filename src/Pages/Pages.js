@@ -15,7 +15,6 @@ const Pages = () => {
             <Routes>
                 {/* <Route exact path="/" element={<Home />} /> */}
                 <Route exact path="/" element={<Navigate replace to="/home" />} />
-
                 <Route path="/home/*" element={<Home />} />
                 <Route exact path="/login" element={<Navigate replace to="/" />} />
                 <Route exact path="/register" element={<Navigate replace to="/" />} />

@@ -5,6 +5,12 @@
   box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.129);
   max-width: 800px;
   margin-bottom: 2rem;
+  background: rgb(240, 240, 240);
+  background: linear-gradient(
+    0deg,
+    rgba(240, 240, 240, 1) 0%,
+    rgba(255, 255, 255, 1) 39%
+  );
 }
 
 .profile .top {

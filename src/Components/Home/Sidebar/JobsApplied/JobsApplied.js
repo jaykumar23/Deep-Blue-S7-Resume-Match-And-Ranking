@@ -44,7 +44,6 @@ export default class JobsApplied extends Component {
                                 </div>
                             )
                         })}
-
                     </div>
                 </div>
             </>

@@ -13,9 +13,10 @@ export default class PrimaryTab extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${baseUrl}/api/all_job/`)
+        const id = localStorage.getItem("USER_ID")
+        axios.get(`${baseUrl}/api/all_job/${id}`)
             .then(res => {
-                // console.log(res);
+                console.log(res);
                 this.setState({ isLoading: true })
                 this.setState({ primaryOffers: res.data })
                 this.setState({ isLoading: false })
@@ -34,7 +35,7 @@ export default class PrimaryTab extends Component {
                     return (
                         <Link to={{ pathname: "view/" + (index + 1) }} state={{ ...curElem }}>
                             <div className="conatiner-fluid tab-card" key={index}>
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                {/* <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> */}
                                 <h5>{curElem.recruiter.company_name}</h5>
                                 <p>{`Description: ${curElem.job.job_description} | and | ${curElem.job.perks}`}</p>
                             </div>

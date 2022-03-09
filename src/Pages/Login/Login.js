@@ -39,7 +39,14 @@ export default class Login extends Component {
                         // alert("Login Successfull")
                         localStorage.setItem("isLoggedIn", "true");
                         localStorage.setItem("USER_ID", response.data.id);
-                        localStorage.setItem("USER_NAME", response.data.first_name);
+                        localStorage.setItem("USER_FNAME", response.data.first_name);
+                        localStorage.setItem("USER_LNAME", response.data.last_name);
+                        localStorage.setItem("USER_GENDER", response.data.gender);
+                        localStorage.setItem("USER_MOBILE", response.data.mobile_no);
+                        localStorage.setItem("USER_EMAIL", response.data.email);
+                        localStorage.setItem("USER_ROLE", response.data.role);
+                        localStorage.setItem("USER_SKILLS", response.data.skills);
+                        localStorage.setItem("USER_EDUCATION", response.data.education);
                         this.setState({ isLoading: false })
                         window.location.reload()
                     }
