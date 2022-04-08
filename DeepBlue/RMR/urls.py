@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/jobs/', views.upload_job),
     path('api/expired_jobs/<userid>', views.expired_job),
     path('api/applicants/<userid>', views.view_job_applicants),
+    path('api/job_applicants/<jobid>', views.view_applicants),
     path('api/status/', views.status_update),
     path('api/apply/', views.apply_for_job),
     path('api/applied_jobs/<userid>', views.applied_jobs),

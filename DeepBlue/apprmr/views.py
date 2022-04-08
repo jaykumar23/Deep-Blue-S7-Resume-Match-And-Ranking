@@ -326,6 +326,35 @@ def view_job_applicants(request,userid):
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
 
 
+# VIEW JOB AND APPLICANTS TO RECRUITER
+@api_view(['GET'])
+def view_applicants(request,jobid):
+    if request.method == 'GET':
+
+        data = []
+        # applicant = {}
+        applicantjobobj = ApplicantResumeJobRecruiter.objects.select_related('job').filter(job_id=jobid)
+        for j in range(len(applicantjobobj)):
+            applicant = {}
+            # applicant[j] = {}
+            applicant.update(SignupSerializer(applicantjobobj[j].applicant).data)
+
+            applicantprofileobj = ApplicantProfile.objects.get(applicant=applicantjobobj[j].applicant.id)
+            applicant.update(ApplicantProfileSerializer(applicantprofileobj).data)
+
+            applicantresumeobj = Resume.objects.get(applicant=applicantjobobj[j].applicant.id)
+            applicant.update(ResumeSerializer(applicantresumeobj).data)
+        # j = {}
+        # j['applicant'] = applicant
+            data.append(applicant)
+
+        return JsonResponse(data, safe=False)
+    else:
+        return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
+
+
+
+
 ############################################################################################################################################
 
 
