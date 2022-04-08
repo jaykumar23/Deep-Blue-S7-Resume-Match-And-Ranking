@@ -1,0 +1,23 @@
+.applicant-list {
+  background-color: #5cb8431f;
+  border-bottom: 2px solid #5cb84377;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.applicant-list:hover {
+  background-color: #5cb84341;
+  cursor: pointer;
+}
+
+.applicant-list #pro-btn {
+  padding: 0.3rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 5px;
+  background-color: #318a6e;
+  border: none;
+  color: rgb(255, 255, 255);
+}

@@ -7,7 +7,7 @@
 .jobs-applied .job-container {
   height: 40vh;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   border-radius: 10px;
 }
 

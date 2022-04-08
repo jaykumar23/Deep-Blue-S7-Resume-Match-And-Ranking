@@ -39,6 +39,7 @@
 .navbar #role {
   font-size: 0.8rem;
   color: rgb(231, 231, 231);
+  text-transform: capitalize;
 }
 
 .navbar .drop-down {

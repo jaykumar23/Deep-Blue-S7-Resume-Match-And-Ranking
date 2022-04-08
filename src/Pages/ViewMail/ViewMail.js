@@ -1,13 +1,5 @@
 import * as React from 'react';
-import Navbar from '../../Components/Navigation/Navbar/Navbar'
 import { } from './ViewMail.css'
-import Sidebar from '../../Components/Home/Sidebar/Sidebar';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import MainScreen from '../../Components/Home/MainScreen/MainScreen';
-import ReplayIcon from '@mui/icons-material/Replay';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import MailContainer from '../../Components/Home/MailContainer/MailContainer';
 import { NavLink } from 'react-router-dom'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos'
 import BusinessIcon from '@mui/icons-material/Business';
@@ -32,7 +24,7 @@ class ViewMailCC extends React.Component {
         }
     }
     render() {
-        console.log(this.props.location.state.job);
+        // console.log(this.props.location.state.job);
         const { job, recruiter, status } = this.props.location.state
         const viewWebsite = (link) => {
             window.location.href = link

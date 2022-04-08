@@ -16,7 +16,6 @@ export default class PrimaryTab extends Component {
         const id = localStorage.getItem("USER_ID")
         axios.get(`${baseUrl}/api/all_job/${id}`)
             .then(res => {
-                console.log(res);
                 this.setState({ isLoading: true })
                 this.setState({ primaryOffers: res.data })
                 this.setState({ isLoading: false })

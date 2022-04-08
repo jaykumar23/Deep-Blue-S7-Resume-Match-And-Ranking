@@ -51,7 +51,7 @@
 .home .search-bar input:focus-within,
 .home .search-bar input:hover {
   background-color: #5cb84316;
-  box-shadow: 0 0 5px 0px#29292915;
+  box-shadow: 0 0 5px 0px #29292915;
   border: 2px solid #5cb84340;
 }
 
@@ -108,13 +108,21 @@
   transform: rotate(-60deg);
 }
 
-.home input#upload {
+.home input,
+.home textarea {
   width: 100%;
   padding: 0.5rem 1rem;
   border-radius: 10px;
+  border: 2px solid rgb(106, 106, 106);
+  min-height: 44px !important;
 }
 
 .home .modal-dialog .spinner-border {
   width: 1rem;
   height: 1rem;
+}
+
+.home .mantine-wehybc {
+  border: 0;
+  padding: auto 10px;
 }

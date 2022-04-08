@@ -10,7 +10,6 @@ const Profile = () => {
     const role = localStorage.getItem("USER_ROLE")
 
     const avatar = `${fName.slice(0, 1)}${lName.slice(0, 1)}`
-    console.log(avatar);
     return (
         <>
             <Navbar></Navbar>
@@ -27,7 +26,7 @@ const Profile = () => {
                             <div className="avatar me-3">{avatar}</div>
                             <div className="display-info d-flex align-items-center justify-content-between w-100">
                                 <p id='name'>{fName} {lName}</p>
-                                <p className='text-light me-3'>{localStorage.getItem("USER_ROLE")}</p>
+                                <p className='text-light me-3 text-capitalize'>{localStorage.getItem("USER_ROLE")}</p>
                             </div>
                         </div>
                     </div>
@@ -46,13 +45,15 @@ const Profile = () => {
                                 <p className='title'>Gender :</p>
                                 <p className='info'>{localStorage.getItem("USER_GENDER")}</p>
                             </div>
-                            <div className="d-flex info-div">
-                                <p className='title'>Eduction :</p>
-                                <p className='info'>{localStorage.getItem("USER_EDUCATION")}</p>
-                            </div>
-                            <div className="d-flex info-div">
-                                <p className='title'>Skills :</p>
-                                <p className='info'>{localStorage.getItem("USER_SKILLS")}</p>
+                            <div className={role === "recruiter" ? "d-none" : ""}>
+                                <div className="d-flex info-div">
+                                    <p className='title'>Eduction :</p>
+                                    <p className='info'>{localStorage.getItem("USER_EDUCATION")}</p>
+                                </div>
+                                <div className="d-flex info-div">
+                                    <p className='title'>Skills :</p>
+                                    <p className='info'>{localStorage.getItem("USER_SKILLS")}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
