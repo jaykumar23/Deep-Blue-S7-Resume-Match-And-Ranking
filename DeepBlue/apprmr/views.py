@@ -1,9 +1,14 @@
 import json
 
+import gdown
+import sys, fitz
+
 from django.core.mail import send_mail
 from django.http.response import JsonResponse, HttpResponse
 from rest_framework import status
-from datetime import datetime, time, timedelta
+from datetime import datetime, time, timedelta, date
+
+# from seq import nlp_model
 from .models import *
 from .serializers import *
 from rest_framework.decorators import api_view
@@ -203,21 +208,42 @@ def user_profile(request):
     else:
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
 
-
+############################################################################################################################################
 
 # RESUME OPERATIONS
 @api_view(['PUT','POST', 'GET'])
 def upload_resume(request,userid):
     if request.method == 'PUT' or request.method == 'POST':
-        data = request.data.get('')
+        data = request.data
         existing_resume = Resume.objects.filter(applicant=userid)
+        #NLP CODE
+        # print(data)
+        # link = data['resume']
+        # link = link.strip('https://drive.google.com/file/d/')
+        # link = link.strip('/view?usp=sharing')
+        # url = 'https://drive.google.com/uc?export=download&id=' + link
+        # output = 'C:\\Users\\admin\\Downloads\\' + link + '.pdf'
+        # gdown.download(url, output, quiet=False)
+        #
+        # fname = output
+        # doc = fitz.open(fname)
+        # text = ''
+        # for p in doc:
+        #     text = text + str(p.get_text())
+        #     text = ' '.join(text.split('\n'))
+        # print(text)
+        #
+        # doc = nlp_model(text)
+        # for ent in doc.ents:
+        #     print(f'{ent.label_.upper():{30}}-{ent.text}')
+        #NLP CODE
         if not existing_resume:
             general_serialized = ResumeSerializer(data=data)
             if general_serialized.is_valid():
                 general_serialized.save()
             return HttpResponse('Resume Uploaded Successfully')
         else:
-            Resume.objects.filter(applicant=userid).update(resume=data, updated_at=timezone.now())
+            Resume.objects.filter(applicant=userid).update(resume=data['resume'], updated_at=timezone.now())
             return HttpResponse('Resume Updated Successfully')
     elif request.method == 'GET':
         try:
@@ -230,22 +256,21 @@ def upload_resume(request,userid):
     else:
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
 
+############################################################################################################################################
+
 # JOB OPERATIONS
 @api_view(['PUT','POST', 'GET'])
-def upload_job(request,id):
+def upload_job(request):
     if request.method == 'PUT' or request.method == 'POST':
-        data = request.data.get('')
-        existing_job = Job.objects.filter(id=id)
-        if not existing_job:
-            general_serialized = JobSerializer(data=data)
-            if general_serialized.is_valid():
-                general_serialized.save()
-            return HttpResponse('Job Uploaded Successfully')
-        else:
-            Job.objects.filter(id=id).update(designation=data.designation, location=data.location, start_date=data.start_date, duration=data.duration, stipend=data.stipend, apply_by=data.apply_by, job_description=data.job_description, skills_required=data.skills_required, who_can_apply=data.who_can_apply, perks=data.perks, number_of_openings=data.number_of_openings, updated_at=timezone.now())
-            return HttpResponse('Job Updated Successfully')
+        data = request.data
+        data['skills_required'] = set(data['skills_required'])
+        general_serialized = JobSerializer(data=data)
+        if general_serialized.is_valid():
+            general_serialized.save()
+        return HttpResponse('Job Uploaded Successfully')
     elif request.method == 'GET':
         try:
+            id = request.data.get('id')
             existing_job= Job.objects.get(id=id)
             job_serializer = JobSerializer(existing_job)
             o = job_serializer.data
@@ -255,34 +280,53 @@ def upload_job(request,id):
     else:
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
 
-
+# EXPIRED JOB OPERATIONS
+@api_view(['GET'])
+def expired_job(request,userid):
+    if request.method == 'GET':
+        try:
+            data = []
+            existing_job = Job.objects.filter(apply_by__lt=date.today(), recruiter=userid)
+            for i in range(len(existing_job)):
+                data.append(JobSerializer(existing_job[i]).data)
+            return JsonResponse(data, safe=False)
+        except:
+            return HttpResponse('Something Went Wrong')
+    else:
+        return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
 
 
 # VIEW JOB AND APPLICANTS TO RECRUITER
 @api_view(['GET'])
 def view_job_applicants(request,userid):
     if request.method == 'GET':
-        data = {}
-        jobobj = Job.objects.select_related('recruiter').filter(recruiter_id=userid)
+
+        data = []
+        jobobj = Job.objects.select_related('recruiter').filter(recruiter_id=userid, apply_by__gt=date.today())
         for i in range(len(jobobj)):
-            data[i] = {}
-            data[i]['job'] = JobSerializer(jobobj[i]).data
-            data[i]['applicant'] = {}
+            job = JobSerializer(jobobj[i]).data
+            applicant = {}
             applicantjobobj = ApplicantResumeJobRecruiter.objects.select_related('job').filter(job_id=jobobj[i].id)
             for j in range(len(applicantjobobj)):
-                data[i]['applicant'][j] = {}
-
-                data[i]['applicant'][j].update(SignupSerializer(applicantjobobj[j].applicant).data)
+                applicant[j] = {}
+                applicant[j].update(SignupSerializer(applicantjobobj[j].applicant).data)
 
                 applicantprofileobj = ApplicantProfile.objects.get(applicant=applicantjobobj[j].applicant.id)
-                data[i]['applicant'][j].update(ApplicantProfileSerializer(applicantprofileobj).data)
+                applicant[j].update(ApplicantProfileSerializer(applicantprofileobj).data)
 
                 applicantresumeobj = Resume.objects.get(applicant=applicantjobobj[j].applicant.id)
-                data[i]['applicant'][j].update(ResumeSerializer(applicantresumeobj).data)
+                applicant[j].update(ResumeSerializer(applicantresumeobj).data)
+            j = {}
+            j['job'] = job
+            j['applicant'] = applicant
+            data.append(j)
 
         return JsonResponse(data, safe=False)
     else:
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
+
+
+############################################################################################################################################
 
 
 # RECRUITER STATUS UPDATE
@@ -309,13 +353,14 @@ def status_update(request):
 @api_view(['POST'])
 def apply_for_job(request):
     if request.method == 'POST':
-        data = request.data.get('')
+        data = request.data
 
-        if not data.applicant or not data.job or not data.status:
+        if not data['applicant'] or not data['job'] or not data['status']:
             return JsonResponse({"status": False, "Desc": "Coudln't get data from site"})
 
         else:
-            existing_status = ApplicantResumeJobRecruiter.objects.filter(Q(applicant=data.applicant) & Q(job=data.job))
+            data['status'] = int(data['status'])
+            existing_status = ApplicantResumeJobRecruiter.objects.filter(Q(applicant=data['applicant']) & Q(job=data['job']))
             if not existing_status:
                 general_serialized = ApplicantResumeJobRecruiterSerializer(data=data)
                 if general_serialized.is_valid():
@@ -327,7 +372,7 @@ def apply_for_job(request):
         # Wrong Request method
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
 
-
+############################################################################################################################################
 
 # JOB APPLIED APPLIED BY APPLICANTS
 @api_view(['GET'])
@@ -350,13 +395,34 @@ def applied_job(request, userid):
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
 
 
+# JOB APPLIED APPLIED BY APPLICANTS
+@api_view(['GET'])
+def applied_jobs(request, userid):
+    if request.method == 'GET':
+        data = []
+        jobobj = ApplicantResumeJobRecruiter.objects.select_related('applicant').filter(applicant_id=userid)
+        for i in range(len(jobobj)):
+            job = JobSerializer(jobobj[i].job).data
+            job['status'] = jobobj[i].status
+            recruiter = {}
+            recruiter.update(SignupSerializer(jobobj[i].job.recruiter).data)
+            recruiter.update(RecruiterProfileSerializer(RecruiterProfile.objects.get(recruiter=jobobj[i].job.recruiter.id)).data)
+            j = {}
+            j['job'] = job
+            j['recruiter'] = recruiter
+            data.append(j)
+        return JsonResponse(data, safe=False)
+    else:
+        return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
+
+
 
 # SHOW ALL JOBS
 @api_view(['GET'])
-def show_job(request):
+def show_job(request, userid):
     if request.method == 'GET':
         data = []
-        jobobj = Job.objects.all()
+        jobobj = Job.objects.filter(apply_by__gt=date.today())
         for i in range(len(jobobj)):
             job = JobSerializer(jobobj[i]).data
             recruiter = {}
@@ -365,10 +431,17 @@ def show_job(request):
             j = {}
             j['job'] = job
             j['recruiter'] = recruiter
+            if (ApplicantResumeJobRecruiter.objects.filter(Q(applicant=userid) & Q(job=jobobj[i].id))).exists():
+                j['status'] = '0'
+            else:
+                j['status'] = 'null'
             data.append(j)
         return JsonResponse(data, safe=False)
     else:
         return JsonResponse({"status": False, "Desc": "Wrong Request Method"})
+
+
+############################################################################################################################################
 
 
 # 0 - default
