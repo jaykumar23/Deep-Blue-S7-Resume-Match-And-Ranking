@@ -59,6 +59,7 @@ class ApplicantProfile(models.Model):
 class Resume(models.Model):
     applicant = models.ForeignKey(Signup, related_name='APPLICANTRESUME', on_delete=models.CASCADE, blank=True, null=True)
     resume = models.CharField(max_length=200, null=True, blank=True)
+    gist = ArrayField(models.CharField(max_length=500), blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

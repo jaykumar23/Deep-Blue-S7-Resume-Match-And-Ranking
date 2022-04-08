@@ -8,7 +8,7 @@ from django.http.response import JsonResponse, HttpResponse
 from rest_framework import status
 from datetime import datetime, time, timedelta, date
 
-# from seq import nlp_model
+from seq import nlp_model
 from .models import *
 from .serializers import *
 from rest_framework.decorators import api_view
@@ -217,25 +217,28 @@ def upload_resume(request,userid):
         data = request.data
         existing_resume = Resume.objects.filter(applicant=userid)
         #NLP CODE
-        # print(data)
-        # link = data['resume']
-        # link = link.strip('https://drive.google.com/file/d/')
-        # link = link.strip('/view?usp=sharing')
-        # url = 'https://drive.google.com/uc?export=download&id=' + link
-        # output = 'C:\\Users\\admin\\Downloads\\' + link + '.pdf'
-        # gdown.download(url, output, quiet=False)
-        #
-        # fname = output
-        # doc = fitz.open(fname)
-        # text = ''
-        # for p in doc:
-        #     text = text + str(p.get_text())
-        #     text = ' '.join(text.split('\n'))
-        # print(text)
-        #
-        # doc = nlp_model(text)
-        # for ent in doc.ents:
-        #     print(f'{ent.label_.upper():{30}}-{ent.text}')
+        print(data)
+        link = data['resume']
+        link = link.strip('https://drive.google.com/file/d/')
+        link = link.strip('/view?usp=sharing')
+        url = 'https://drive.google.com/uc?export=download&id=' + link
+        output = 'C:\\Users\\admin\\Downloads\\' + link + '.pdf'
+        gdown.download(url, output, quiet=False)
+
+        fname = output
+        doc = fitz.open(fname)
+        text = ''
+        for p in doc:
+            text = text + str(p.get_text())
+            text = ' '.join(text.split('\n'))
+        print(text)
+        gist = []
+        doc = nlp_model(text)
+        for ent in doc.ents:
+            gist.append(f'{ent.label_.upper()}-{ent.text}')
+            print(f'{ent.label_.upper():{30}}-{ent.text}')
+        data['gist'] = gist
+        print(data['gist'])
         #NLP CODE
         if not existing_resume:
             general_serialized = ResumeSerializer(data=data)
@@ -363,13 +366,13 @@ def view_applicants(request,jobid):
 @api_view(['PUT'])
 def status_update(request):
     if request.method == 'PUT':
-        data = request.data.get('')
+        data = request.data
 
-        if not data.applicant or not data.job or not data.status:
+        if not data['applicant'] or not data['job'] or not data['status']:
             return JsonResponse({"status": False, "Desc": "Coudln't get data from site"})
 
         else:
-            ApplicantResumeJobRecruiter.objects.filter(Q(applicant=data.applicant) & Q(job=data.job)).update(status=data.status)
+            ApplicantResumeJobRecruiter.objects.filter(applicant=data['applicant'], job=data['job']).update(status=data['status'])
             return HttpResponse('Status Updated Successfully')
     else:
         # Wrong Request method
