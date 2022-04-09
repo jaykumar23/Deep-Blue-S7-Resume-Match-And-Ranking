@@ -33,12 +33,14 @@ export default class Home extends React.Component {
         }
 
         const uploadResume = () => {
+            const payload = { resume: this.state.resume, applicant: parseInt(this.state.id) }
+            console.log(payload);
             const id = localStorage.getItem("USER_ID")
             if (this.state.resume.trim() === "") {
                 alert("Field cannot be empty!")
             } else {
                 this.setState({ isLoading: true })
-                axios.post(`${baseUrl}/api/resume/${id}`, this.state)
+                axios.post(`${baseUrl}/api/resume/${id}`, payload)
                     .then((res) => {
                         alert("Resume Uploaded succesfully!")
                         this.state.resume = ""

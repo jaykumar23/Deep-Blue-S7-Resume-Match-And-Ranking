@@ -48,11 +48,11 @@ const Profile = () => {
                             <div className={role === "recruiter" ? "d-none" : ""}>
                                 <div className="d-flex info-div">
                                     <p className='title'>Eduction :</p>
-                                    <p className='info'>{localStorage.getItem("USER_EDUCATION")}</p>
+                                    <p className='info'>Inidian Institute of Technology Mumbai</p>
                                 </div>
                                 <div className="d-flex info-div">
                                     <p className='title'>Skills :</p>
-                                    <p className='info'>{localStorage.getItem("USER_SKILLS")}</p>
+                                    <p className='info'>Machine Learning, Natural Language Processing and Big Data Handling</p>
                                 </div>
                             </div>
                         </div>

@@ -21,3 +21,31 @@
   border: none;
   color: rgb(255, 255, 255);
 }
+
+.action-buttons-now button {
+  margin-right: 1rem;
+  border: 0;
+  outline: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.action-buttons-now button:hover {
+  filter: saturate(1.5);
+}
+
+#accept {
+  background-color: rgb(121, 218, 134);
+  color: #fff;
+}
+#reject {
+  background-color: rgb(225, 96, 96);
+  color: #fff;
+}
+
+#int-round {
+  background-color: rgb(251, 234, 147);
+  color: rgb(0, 0, 0);
+}
